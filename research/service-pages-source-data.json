@@ -1,0 +1,51 @@
+{
+  "extractedAt": "2026-07-11",
+  "sources": [
+    {
+      "url": "https://www.kaffee-baerlin.de/kaffeemaschinen-reparatur-berlin.html",
+      "newRoute": "/kaffeemaschinen-reparatur-berlin",
+      "contentUsed": [
+        "Selbstanlieferung ohne Voranmeldung",
+        "kostenloser Abholservice innerhalb Berlins nur fuer Kaffeevollautomaten",
+        "Ausschluss Siebtraegermaschinen vom Abholservice",
+        "bundesweiter Selbstversand",
+        "kostenloser und unverbindlicher Kostenvoranschlag",
+        "Rueckversandkosten 9,90 Euro bei abgelehntem Angebot"
+      ]
+    },
+    {
+      "url": "https://www.kaffee-baerlin.de/kaffeemaschinen-vermietung-berlin.html",
+      "newRoute": "/kaffeemaschinen-vermietung-berlin",
+      "contentUsed": [
+        "Mietmaschinen und Mietpreise fuer Jura Giga X7, ECM Elektronika 2 Gruppig, Jura X8, Bezzera Aria, Jura XJ9 und Ceado E37",
+        "Kaffeebohnen Miss Silvia Caffe Crema, Aroma und Espresso mit Preisen",
+        "Geschaeftszeiten fuer Abholung und Rueckgabe: Mo - Fr, 08:00 - 16:00 Uhr",
+        "Hinweis auf kostenloses und unverbindliches individuelles Angebot"
+      ]
+    },
+    {
+      "url": "https://www.kaffee-baerlin.de/kaffeeautomaten-service-berlin.html",
+      "newRoute": "/kaffeeautomaten-service-berlin",
+      "contentUsed": [
+        "Online-Formular als Anfrageformular oder Abholtermin-Vorschlag",
+        "Formularfelder fuer Kontaktdaten, Maschinendaten und Fehlerbeschreibung",
+        "Abholtage Montag, Mittwoch oder Freitag",
+        "Zeitfenster 08:00 - 10:00 Uhr und 10:00 - 12:00 Uhr"
+      ]
+    },
+    {
+      "url": "https://www.kaffee-baerlin.de/kaffeevollautomaten-reparaturservice.html",
+      "newRoute": "/kaffeevollautomaten-reparaturservice",
+      "contentUsed": [
+        "Reparatur-Annahmestellen in Berlin",
+        "Standortnamen, Adressen, Oeffnungszeiten und Maps-Links",
+        "Hinweis, Oeffnungszeiten vor Abgabe zu pruefen"
+      ]
+    }
+  ],
+  "notes": [
+    "Die neuen Formulare sind nur Frontend. Kein Versand, kein altes Joomla-Formular, kein reCAPTCHA und kein Tracking wurden eingebunden.",
+    "Die alten .html-URLs werden per permanentem Redirect auf die neuen Next.js-Routen weitergeleitet.",
+    "Preise sind quellenbasiert aus der Altseite uebernommen und sollten vor Livegang vom Betrieb bestaetigt werden."
+  ]
+}
