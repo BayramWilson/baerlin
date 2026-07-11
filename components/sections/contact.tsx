@@ -32,7 +32,7 @@ export function Contact() {
             />
           </div>
           <div className="flex flex-col justify-center bg-[var(--color-muted)] p-6 sm:p-8 lg:p-10">
-            <h3 className="font-display text-2xl text-[var(--color-primary)]">Abholservice in Berlin</h3>
+            <h3 className="font-display text-2xl text-[var(--color-primary)]">Kostenloser Abholservice</h3>
             <ul className="mt-6 grid gap-4">
               {data.pickup.conditions.map((condition) => (
                 <li className="flex gap-3 leading-7" key={condition}>

@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.kaffee-baerlin.de"),
   title: "Kaffeemaschinen Reparatur Berlin | Kaffee Bärlin",
   description:
-    "Kaffee Bärlin in Berlin-Moabit repariert und wartet Kaffee- und Espressomaschinen mit kostenloser Diagnose, Kostenvoranschlag und Abholservice für Kaffeevollautomaten in Berlin.",
+    "Kaffee Bärlin in Berlin-Moabit repariert und wartet Kaffee- und Espressomaschinen mit kostenloser Diagnose, Kostenvoranschlag und Abholservice für Kaffeevollautomaten.",
   openGraph: {
     title: "Kaffeemaschinen Reparatur Berlin | Kaffee Bärlin",
     description:
-      "Reparatur, Wartung, kostenlose Diagnose und kostenloser Abholservice für Kaffeevollautomaten in Berlin.",
+      "Reparatur, Wartung, kostenlose Diagnose und kostenloser Abholservice für Kaffeevollautomaten in Berlin-Moabit.",
     url: "https://www.kaffee-baerlin.de/",
     siteName: "Kaffee Bärlin",
     locale: "de_DE",

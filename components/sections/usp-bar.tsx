@@ -7,7 +7,7 @@ const usps = [
     icon: "check" as const,
   },
   {
-    title: "Kostenlose Abholung in Berlin",
+    title: "Kostenlose Abholung",
     text: "Für Kaffeevollautomaten nach Terminvereinbarung.",
     icon: "truck" as const,
   },

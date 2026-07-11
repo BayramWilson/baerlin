@@ -9,11 +9,10 @@ export function Hero() {
         <div>
           <p className="eyebrow">Reparaturwerkstatt in Berlin-Moabit</p>
           <h1 className="mt-4 max-w-4xl font-display text-4xl leading-tight text-[var(--color-primary)] sm:text-5xl lg:text-6xl">
-            Kaffeemaschinen-Reparatur in Berlin.
+            Fachwerkstatt für Kaffeemaschinen.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-muted-foreground)]">
-            Kostenlose Diagnose, Kostenvoranschlag und Abholung für Kaffeevollautomaten
-            in Berlin.
+            Kostenlose Diagnose, Kostenvoranschlag und Abholung für Kaffeevollautomaten.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a className="btn-cta" href={phoneHref}>
