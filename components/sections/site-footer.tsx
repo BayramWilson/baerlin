@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { data, todos } from "@/lib/source-data";
+import { data } from "@/lib/source-data";
 
 export function SiteFooter() {
   return (
@@ -20,6 +20,10 @@ export function SiteFooter() {
         </div>
         <div className="md:text-right">
           <nav className="flex flex-wrap gap-4 md:justify-end">
+            <Link href="/kaffeemaschinen-reparatur-berlin">Reparatur</Link>
+            <Link href="/kaffeemaschinen-vermietung-berlin">Mietmaschinen</Link>
+            <Link href="/kaffeeautomaten-service-berlin">Online-Formular</Link>
+            <Link href="/kaffeevollautomaten-reparaturservice">Annahmestellen</Link>
             <Link href="/impressum">Impressum</Link>
             <Link href="/datenschutz">Datenschutz</Link>
             <Link href="/agb">AGB</Link>
@@ -29,14 +33,6 @@ export function SiteFooter() {
           </p>
         </div>
       </div>
-      <details className="mx-auto max-w-7xl px-4 pb-8 text-sm text-[#FDF6EC] sm:px-6 lg:px-8">
-        <summary className="cursor-pointer font-semibold">Offene TODOs</summary>
-        <ul className="mt-3 grid gap-2">
-          {todos.map((todo) => (
-            <li key={todo}>{todo}</li>
-          ))}
-        </ul>
-      </details>
     </footer>
   );
 }

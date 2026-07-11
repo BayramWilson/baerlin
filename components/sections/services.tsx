@@ -12,9 +12,9 @@ export function Services() {
           <div>
             <h2 className="section-title">Reparatur, Wartung und Ersatzteile aus einer Werkstatt.</h2>
             <p className="mt-5 text-lg leading-8 text-[var(--color-muted-foreground)]">
-              Die Seite nennt Reparaturen mit Original-Ersatzteilen, Wartung,
-              Inspektion und bundesweiten Versandservice. Preise werden hier nicht
-              ergänzt, weil sie in den Quellen nicht vollständig belegt sind.
+              Von der Fehlerdiagnose bis zur fertigen Reparatur: Wir prüfen Ihr
+              Gerät, erstellen einen kostenlosen Kostenvoranschlag und setzen es
+              nach Ihrer Freigabe instand.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <SiteImage

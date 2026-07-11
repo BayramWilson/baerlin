@@ -6,13 +6,13 @@ export function Contact() {
   return (
     <section id="kontakt" className="section-pad">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid overflow-hidden rounded-lg border border-[var(--color-border)] bg-white shadow-sm lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="grid overflow-hidden rounded-lg border border-[var(--color-border)] bg-white shadow-sm lg:grid-cols-[1.05fr_0.95fr]">
           <div className="p-6 sm:p-8 lg:p-10">
             <p className="eyebrow">Kontakt</p>
             <h2 className="section-title">Reparatur oder Abholung anfragen.</h2>
             <p className="mt-5 leading-7 text-[var(--color-muted-foreground)]">
-              Für die schnellste Klärung rufen Sie direkt an. Das Formular ist als
-              Frontend vorbereitet; Versand und Datenschutzprüfung bleiben TODO.
+              Rufen Sie uns direkt an oder schreiben Sie eine E-Mail. Für die
+              Abholung eines Kaffeevollautomaten vereinbaren wir gemeinsam einen Termin.
             </p>
             <div className="mt-8 grid gap-3">
               <a className="btn-cta justify-center sm:justify-start" href={phoneHref}>
@@ -31,34 +31,21 @@ export function Contact() {
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
           </div>
-          <form className="grid gap-4 bg-[var(--color-muted)] p-6 sm:p-8 lg:p-10">
-            <label>
-              <span className="form-label">Name</span>
-              <input className="input mt-2 w-full" name="name" type="text" />
-            </label>
-            <label>
-              <span className="form-label">Telefon</span>
-              <input className="input mt-2 w-full" name="phone" type="tel" />
-            </label>
-            <label>
-              <span className="form-label">Gerät / Marke</span>
-              <input className="input mt-2 w-full" name="machine" type="text" />
-            </label>
-            <label>
-              <span className="form-label">Nachricht</span>
-              <textarea className="input mt-2 min-h-32 w-full resize-y" name="message" />
-            </label>
-            <button
-              className="btn-cta opacity-75"
-              type="button"
-              aria-describedby="form-todo"
-            >
-              Anfrage vorbereiten
-            </button>
-            <p id="form-todo" className="text-sm leading-6 text-[var(--color-muted-foreground)]">
-              TODO: Formularversand ist noch nicht implementiert.
+          <div className="flex flex-col justify-center bg-[var(--color-muted)] p-6 sm:p-8 lg:p-10">
+            <h3 className="font-display text-2xl text-[var(--color-primary)]">Abholservice in Berlin</h3>
+            <ul className="mt-6 grid gap-4">
+              {data.pickup.conditions.map((condition) => (
+                <li className="flex gap-3 leading-7" key={condition}>
+                  <Icon name="check" className="mt-1 h-5 w-5 shrink-0 text-[var(--color-accent)]" />
+                  <span>{condition}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 border-t border-[var(--color-border)] pt-5 text-sm leading-6 text-[var(--color-muted-foreground)]">
+              Siebträgermaschinen sind vom Abholservice ausgeschlossen und können
+              direkt in Alt-Moabit 120 abgegeben werden.
             </p>
-          </form>
+          </div>
         </div>
       </div>
     </section>

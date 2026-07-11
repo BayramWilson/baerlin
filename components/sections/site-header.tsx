@@ -18,14 +18,15 @@ export function SiteHeader() {
           />
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-semibold text-[var(--color-muted-foreground)] md:flex">
-          <a href="#leistungen">Leistungen</a>
-          <a href="#ablauf">Ablauf</a>
-          <a href="#standort">Standort</a>
-          <a href="#kontakt">Kontakt</a>
+          <Link href="/kaffeemaschinen-reparatur-berlin">Reparatur</Link>
+          <Link href="/kaffeemaschinen-vermietung-berlin">Miete</Link>
+          <Link href="/kaffeevollautomaten-reparaturservice">Annahmestellen</Link>
+          <Link href="/#kontakt">Kontakt</Link>
         </nav>
         <a className="btn-cta min-h-11 px-4 py-2 text-sm" href={phoneHref}>
           <Icon name="phone" className="h-4 w-4" />
-          {data.nap.phone}
+          <span className="sm:hidden">Anrufen</span>
+          <span className="hidden sm:inline">{data.nap.phone}</span>
         </a>
       </div>
     </header>

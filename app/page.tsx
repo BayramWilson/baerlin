@@ -6,7 +6,6 @@ import { Process } from "@/components/sections/process";
 import { Services } from "@/components/sections/services";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteHeader } from "@/components/sections/site-header";
-import { SourceMapping } from "@/components/sections/source-mapping";
 import { Trust } from "@/components/sections/trust";
 import { UspBar } from "@/components/sections/usp-bar";
 import { localBusinessJsonLd } from "@/lib/source-data";
@@ -29,7 +28,6 @@ export default function Home() {
         <Trust />
         <Location />
         <Contact />
-        <SourceMapping />
       </main>
       <SiteFooter />
     </>

@@ -28,15 +28,9 @@ export function Location() {
                 Mo-Fr: {data.hours.monFri}
                 <br />
                 Sa: {data.hours.sat}
-                <br />
-                So: nicht angegeben
               </p>
             </div>
           </div>
-          <p className="mt-5 text-sm leading-6 text-[var(--color-muted-foreground)]">
-            TODO: Zusätzliche Annahmestellen sind auf der Altseite erwähnt, aber
-            noch nicht vollständig mit Adressen und Öffnungszeiten erfasst.
-          </p>
         </div>
         <SiteImage
           src="/images/ladenfront.webp"
