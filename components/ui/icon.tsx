@@ -6,7 +6,9 @@ type IconName =
   | "clock"
   | "check"
   | "shield"
-  | "mail";
+  | "mail"
+  | "menu"
+  | "x";
 
 const paths: Record<IconName, string> = {
   phone:
@@ -24,6 +26,8 @@ const paths: Record<IconName, string> = {
     "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3.5-10.5 2.5 2.5 4.5-5",
   mail:
     "M4 4h16v16H4V4Zm0 4 8 5 8-5",
+  menu: "M4 6h16M4 12h16M4 18h16",
+  x: "M18 6 6 18M6 6l12 12",
 };
 
 export function Icon({ name, className = "" }: { name: IconName; className?: string }) {
