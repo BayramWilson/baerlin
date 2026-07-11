@@ -1,0 +1,571 @@
+
+╭─── Claude Code v2.1.207 ─────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting started                                        │
+│                 Welcome back rammo!                │ Run /init to create a CLAUDE.md file with instructions for Cla… │
+│                                                    │ ─────────────────────────────────────────────────────────────── │
+│                       ▐▛███▜▌                      │ What's new                                                      │
+│                      ▝▜█████▛▘                     │ Auto mode is now available without `CLAUDE_CODE_ENABLE_AUTO_MO… │
+│                        ▘▘ ▝▝                       │ Fixed the terminal freezing and keystrokes lagging while strea… │
+│      Sonnet 5 with high effort · Claude Pro · bayram@kawai-labs.com's Organization          │ /release-notes for more                                         │
+│               ~/coffewebsites/baerlin              │                                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+❯ /model
+  ⎿  Set model to Sonnet 5 (default) and saved as your default for new sessions
+
+❯ # Code-Agent Prompt — Moderne Website aus Altdaten (Kawai Labs Pipeline) · v2
+
+  > Vorlage für Claude Code. Oben die Variablen setzen, dann alles ab „ROLLE" an den Agent geben.
+  > Wiederverwendbar für andere Local-Business-Kunden: nur den Variablen-Block anpassen.
+  > v2: KI-Bilder als Primärquelle, Local-SEO/JSON-LD, Rechtsseiten als Routen, Abholservice-USP.
+
+  ---
+
+  ## VARIABLEN (vor dem Lauf ausfüllen)
+
+  ```
+  BUSINESS_NAME   = "Kaffee Bärlin"
+  BRANCHE         = "Reparaturwerkstatt für Kaffee- & Espressomaschinen (Home Services / Repair, NICHT Gastronomie)"
+  MAPS_URL        = "https://maps.app.goo.gl/6JyAFQN486V6gRmXA"
+  ALTSEITE_URL    = "https://www.kaffee-baerlin.de/"
+  SHOP_URL        = "https://www.kaffee-baerlintext
+  SPRACHE         = "Deutsch (Sie-Ansprache)"
+  PROJEKT_ROOT    = "."          # bereits initialisiertes Next.js-Projekt
+  BILDER_DIR      = "public/images/"   # hier en Bilder (siehe Namenskonvention)
+  ```
+
+  ---
+
+  ## ROLLE
+
+  Du bist Senior Frontend-Engineer & Designer bei Kawai Labs. Du baust aus den Bestandsdaten einer
+  veralteten Website eine moderne, conversion-ngpage im bereits
+  initialisierten Next.js-Projekt. Arbeite in klar getrennten Phasen und **stoppe an den markierten
+  Gates** für meine Freigabe, bevor du weiterm
+
+  ## ZIEL
+
+  Eine schnelle, zugängliche, hochwertig aussegpage, die die echten
+  Leistungen des Betriebs zeigt und Besucher zu Anruf / kostenloser Abholung / Geräteabgabe führt.
+  Keine Erfindungen: Inhalte, Marken, Preise uhließlich aus den Quellen.
+
+  ## SKILLS (Aufgabenteilung — nicht vermische
+
+  - **ui-ux-pro-max** → nur in Phase 1: Designeren. Danach nicht mehr aufrufen.
+  - **taste** → in Phase 5: Ausführungs-Feinschliff & Qualitätsreview.
+
+  ## TECH-STACK
+
+  - Next.js (App Router, TypeScript), das bestehende Projekt in `PROJEKT_ROOT` weiterverwenden — nicht neu
+  initialisieren.
+  - Tailwind CSS, `next/image`, `next/font` (Google Fonts aus dem Design-System, `display: swap`).
+  - Playwright MCP für das Scraping.
+  - Keine schweren UI-Libs ohne Grund; Icons als SVG (Lucide/Heroicons), keine Emojis als Icons.
+
+  ---
+
+  ## PHASE 0 — Recherche & Datenextraktion  (Playwright MCP)
+
+  1. `ALTSEITE_URL` als **Primärquelle für Inhalte** crawlen (Startseite + Unterseiten wie Reparatur-
+     service, Abholservice, Ablauf, Kontakt, IExtrahieren: Leistungen,
+     servicierte
+  ──── (121 lines hidden) ────────────────────────────────────────────────────────────────
+  b der größte Hebel)
+
+  - Next.js Metadata API: `title` („Kaffeemaschinen Reparatur Berlin | Kaffee Bärlin" o. ä. aus echten
+    Daten), `description` mit USPs, `openGraph
+  - **JSON-LD `LocalBusiness`** (bzw. passenderes Schema wie `HomeAndConstructionBusiness`/Repair):
+    name, address, telephone, openingHoursSpeced: Berlin —
+    ausschließlich aus `source-data.json`, nichts erfinden. Kein aggregateRating-Markup, wenn die
+    Reviews nicht auf der eigenen Seite erhobe
+  - `sitemap.ts` + `robots.ts`, sinnvolle `lang="de"` im Root-Layout, Favicon-Platzhalter falls kein Logo.
+
+  ---
+
+  ## PHASE 5 — Polish & QA  (taste)
+
+  - **taste** für Feinschliff: Hierarchie, Rhythmus, Kontraste, Hover/Focus-States, Motion (150–300ms,
+    `prefers-reduced-motion` respektieren).
+  - Gegen die Pre-Delivery-Checklist aus `MASTER.md` prüfen.
+  - A11y: Kontrast ≥ 4.5:1, Fokus sichtbar, Ta sinnvolle Heading-Hierarchie.
+  - Performance: LCP = Hero-Bild mit `priority`, keine Layout-Shifts, Fonts mit `display: swap`,
+    keine ungenutzten Dependencies.
+  - `npm run build` muss fehlerfrei durchlaufen; danach kurz per Playwright einen Screenshot der
+    fertigen Seite in 375px und 1440px machen st prüfen.
+
+  **⛔ GATE 5:** Kurzbericht: was gebaut, welcDOs/Placeholder offen.
+
+  ---
+
+  ## HARTE REGELN (Guardrails)
+
+  - **Keine erfundenen Fakten** — keine Preiseeiten oder Kontaktdaten, die
+    nicht in den Quellen stehen. Unsicheres als `TODO` markieren.
+  - **Rechtstexte** 1:1 übernehmen; fehlt etwaHinweis (rechtlich Pflicht in DE).
+  - **Pflicht-Disclaimer** einbauen: „unabhängiger Kundendienst, kein Werkskundendienst / offizieller
+    Servicepartner der genannten Marken" — sinnamen nur als Text, nie als Logo.
+  - **Sprache:** durchgängig Deutsch, Sie-Form, seriös-handwerklich (kein Marketing-Sprech-Overkill).
+  - Bestehendes Next.js-Projekt weiterverwende
+  - An jedem Gate stoppen und auf Freigabe warten.
+
+  ## DEFINITION OF DONE
+
+  Responsive, zugängliche, buildbare Site aus echten Daten; Rechtsseiten als Routen; JSON-LD +
+  Metadata + OG-Image gesetzt; alle Bilder ausende als TODO);
+  Design-System persistiert; kein Tracking/Cookie-Banner; `AGENTS.md` und `CLAUDE.md` vorhanden und
+  unter 80 Zeilen; offene Punkte als TODO-List
+
+  Listed 2 directories
+
+No Playwright MCP is available in this envirbFetch for the scraping in Phase 0 (samegoal: extract real content, not invent it). Starting with the old site.
+
+● Fetch(https://www.kaffee-baerlin.de/)
+Received 60.5KB (200 OK)
+
+● Fetch(https://www.kaffee-baerlin.de/kaffeema)
+Received 34.4KB (200 OK)
+
+● Fetch(https://www.kaffee-baerlin.de/kaffeevollautomaten-reparaturservice.html)
+Received 78.9KB (200 OK)
+
+● Fetch(https://www.kaffee-baerlin.de/impressu
+Received 29.8KB (200 OK)
+
+● Fetch(https://www.kaffee-baerlin.de/datenschutz.html)
+Received 38.6KB (200 OK)
+
+● Fetch(https://www.kaffee-baerlin.de/agb.html
+Received 46.4KB (200 OK)
+
+● Fetch(https://www.kaffee-baerlin.de/disclaimer.html)
+Received 30.9KB (200 OK)
+
+● Fetch(https://www.kaffee-baerlin.de/kontakt.
+Received 34.1KB (200 OK)
+
+The legal pages need verbatim text (German law requires exact reproduction), but WebFetch summarizes through a model
+rather than returning raw text. Let me fetch
+
+  Ran 1 shell command
+
+Direct fetch works. Let me pull all the lega this way for verbatim text.
+
+  Ran 4 shell commands
+
+Good, standard Joomla structure. Let me writg itemprop="articleBody".
+
+  Made 1 scratchpad edit +41, ran 1 shell comm
+
+Good — legal texts extracted. Let me check tlly.
+
+  Made 1 scratchpad edit +40, read 5 files, ra
+
+● Fetch(https://maps.app.goo.gl/6JyAFQN486V6gR
+Received 1002 bytes (302 Found)
+
+● Fetch(https://www.google.com/maps/place/Kaffee+B%C3%A4rlin/@52.5231208,13.3566931,17z/data=!4m6!3m5!1s0x47a851a3ba5a49
+       73:0x26b03bcd03b9d589!8m2!3d52.5234037!qx06?entry=tts&g_ep=EgoyMDI2MDcwOC4wIPu8ASoASAFQAw%3D%3D&skid=67d33f01-6963-483d-bd12-f75367d9f78c)
+Received 1.4KB (302 Found)
+
+Maps is behind a consent wall as expected — ates/place-ID for a direct route link andrely on the old site for NAP data, per the fallback instructions. Now compiling the research file.
+
+  Ran 1 shell command
+
+● Write(research/source-data.json)
+Wrote 118 lines to research/source-data.j
+{
+    "extractedFrom": "https://www.kaf direct HTTP fetch of raw HTML, itempr
+-rendered content was captured)",
+    "extractedAt": "2026-07-11",
+    "mapsResolvedPlaceUrl": "https://www.google.com/maps/place/Kaffee+B%C3%A4rlin/@52.5234037,13.3564562
+    "mapsNote": "Google Maps blocked l (consent.google.com redirect). Per f
+e-ID (from the pre-consent-wall redirect chain) could be captured, used below for JSON-LD geo and the ro
+ute link. Rating/review count/review erified — do not display a star rating
+    "mapsNote": "Google Maps blocked scraping behind a consent wall (consent.google.com redirect). Per f
+e-ID (from the pre-consent-wall redirect chain) could be captured, used below for JSON-LD geo and the ro
+ute link. Rating/review count/review erified — do not display a star rating
+  },
+    "name": "KAFFEE BÄRLIN",
+… +393 lines
+
+  Ran 1 shell command
+
+GATE 0 — Datenextraktion abgeschlossen. research/source-data.json liegt vor. Zusammenfassung:
+
+Gut abgedeckt (verbatim/verlässlich):
+- NAP: Alt-Moabit 120, 10559 Berlin · 030/203
+- Impressum, Datenschutz, AGB, Disclaimer — 1:1 Text extrahiert (direkter HTTP-Fetch statt Playwright, da kein
+Playwright MCP verfügbar war)
+- Services, 31 Marken, 3-Schritt-Ablauf, Abholservice-Bedingungen inkl. Ausschlüsse (nur Vollautomaten, keine
+Siebträger, keine Klinik-Abholung, keine geöits-Disclaimer
+
+Drei Dinge, die ich vor Phase 1 mit dir klär
+
+1. Kein Playwright MCP im Environment — ich TTP gefetcht (funktioniert gut für diesesJoomla-Static-HTML, aber JS-gerenderte Inhalte z.B. auf kaffeeautomaten-service-berlin.html blieben unzugänglich).
+2. public/images/ existiert nicht, und es gibaerlin.md im Projekt-Root — die für Phase 4vorausgesetzten KI-Bilder wurden offenbar noch nicht generiert.
+3. Keine echten Kundenbewertungen verfügbar  über Maps (Consent-Wall blockiert, wieerwartet). Die Trust-Section kann also aktuell keine echten Zitate zeigen.
+
+● User answered Claude's questions:
+· Gate 0 ist erledigt. Wie soll ich mit dase 4 umgehen? → Platzhalter setzen,TODO-Liste
+· Soll ich Gate-Freigaben weiterhin einzech Phase 1, IA nach Phase 2, etc.) oderdirekt bis zum fertigen Build durchlaufen und am Ende gesammelt review lassen? → Gates einzeln abwarten (wie im
+Prompt)
+
+Understood — placeholders with a TODO list fach gate as specified. Moving to Phase 1:Design-System.
+
+  Searched for 2 patterns, ran 1 shell command
+Design-System.
+
+  Searched for 2 patterns, ran 1 shell command
+
+Good, matches the prompt's spec. Running it now from the project root.
+
+  Searched for 1 pattern, read 1 file, ran 1 shell command
+
+The generated system defaulted to a generic corporate "Trust & Authority" navy/gold palette (categorized as
+"Plumber/Electrician") — this conflicts withnted coffee-repair identity the brief callsfor. Per the brief's color sanity-check step, I'll pull warmer options and override.
+
+  Ran 1 shell command
+
+The auto-generated system leaned corporate healthcare/fintech (navy + gold, Lexend). I'm overriding to a warm
+espresso/craftsmanship direction that fits tviation as the brief requires.
+
+● Write(design-system/kaffee-baerlin/MASTER.md
+Added 123 lines, removed 76 lines
+# Design System Master File
+
+> **LOGIC:** When building a specifiystem/pages/[page-name].md`.
+> **LOGIC:** When building a specific page, first check `design-system/kaffee-baerlin/pages/[page-name]
+.md`.
+> If that file exists, its rules **override** this Master file.
+> If not, strictly follow the rules
+
+---
+
+**Project:** Kaffee Baerlin
+**Generated:** 2026-07-11 16:38:20
+**Category:** Home Services (Plumber
+**Category:** Home Services (Plumber/Electrician)
+**Project:** Kaffee Bärlin
+**Generated:** 2026-07-11 (base run) — **manually overridden same day, see Deviation Note below**
+**Category:** Reparaturwerkstatt / Hssomaschinen), Berlin
+
+---
+
+## Deviation Note (read this first)
+
+The `ui-ux-pro-max --design-system` project to its generic
+**"Trust & Authority"** pattern (category: Plumber/Electrician) — navy blue `#1E3A8A` + gold
+`#B45309`, Lexend/Source Sans 3 typore/fintech/enterprise-software
+`#B45309`, Lexend/Source Sans 3 typore/fintech/enterprise-software
+landing pages.
+
+That palette was overridden before persisting, per the project brief's color sanity-check step:
+it reads as generic corporate SaaS, craft) coffee-machine repair
+shop in Berlin. It also collides with the web design-quality guardrails ("safe gray-on-white
+styling with one decorative accent,"thout a deliberate reason").
+
+**Replaced with:** a warm espresso/ce tool's Bakery/Cafe color
+match, `--domain color -q "warm espresso brown cream artisan craftsmanship"`) and a
+display-serif + humanist-sans type purced from
+`--domain typography -q "craftsmanship workshop editorial warm serif"`), rather than the
+auto-assigned defaults. Spacing, shans from the base run were kept
+— those are style-agnostic and didn't need correcting.
+
+**Why this pairing:** Calistoga is a bold, slightly hand-lettered slab serif — it reads like
+vintage roastery/workshop signage, ghout tipping into "luxury
+fashion" or "literary magazine" territory (both of which were other candidate pairings but wrong
+for a trade/repair business serving ustomers). Inter carries body
+text and UI at high legibility. The espresso-brown + cream palette ties the site visually to the
+warm tones expected in the (not-yet-y, per the brief's instruction
+that image color grade — not the auto-generated palette — should win in a conflict.
+
+---
+
+## Global Rules
+
+### Color Palette
+
+| Role | Hex | CSS Variable |
+|------|-----|--------------|
+| Primary | `#1E3A8A` | `--color-primary` |
+| On Primary | `#FFFFFF` | `--color-
+| Secondary | `#1E40AF` | `--color-secondary` |
+| Accent/CTA | `#B45309` | `--color-
+| Background | `#F8FAFC` | `--color-background` |
+| Foreground | `#0F172A` | `--color-
+| Muted | `#E9EEF5` | `--color-muted` |
+| Border | `#CBD5E1` | `--color-bord
+| Destructive | `#DC2626` | `--color-destructive` |
+| Ring | `#1E3A8A` | `--color-ring`
+| Role | Hex | CSS Variable | Usage |
+|------|-----|--------------|-------
+| Primary | `#92400E` | `--color-primary` | Nav, headings, primary surfaces |
+| Primary Foreground | `#FFFFFF` | `ons on primary |
+| Secondary | `#B45309` | `--color-secondary` | Secondary buttons, borders, badges |
+| Accent/CTA | `#C2410C` | `--color- ("Jetzt anrufen", "Abholung anfragen"
+) — brighter copper, distinct from Primary so CTAs pop |
+| Accent Foreground | `#FFFFFF` | `-ccent |
+| Background | `#FDF6EC` | `--color-background` | Page background (warm cream/paper, not stark white) |
+| Foreground | `#2A1A10` | `--color--black espresso, not pure black) |
+| Card | `#FFFFFF` | `--color-card` | Card surfaces |
+| Muted | `#F3E4C8` | `--color-mutedrounds |
+| Muted Foreground | `#6B5644` | `--color-muted-foreground` | Secondary text on muted surfaces |
+| Border | `#E8D4A8` | `--color-bord|
+| Destructive | `#DC2626` | `--color-destructive` | Form errors only |
+| Ring | `#C2410C` | `--color-ring` ) |
+
+**Color Notes:** Authority navy + tr
+**Color Notes:** Warm espresso brown + cream, with a brighter copper accent reserved
+exclusively for calls to action so twn/cream field. Verify contrast
+before shipping: Foreground `#2A1A10` on Background `#FDF6EC` and White on Accent `#C2410C` both
+need a 4.5:1 check against final ren
+
+**If dark mode is added later:** do e a dark espresso surface
+(e.g. `#1C120A`) with the same cream/copper accent logic, per "don't default to dark mode
+automatically" in the design-quality this v1 (single light theme is
+the brief's stated direction — trade/craft businesses skew light, physical-shop, daytime).
+
+### Typography
+
+- **Heading Font:** Lexend
+- **Body Font:** Source Sans 3
+- **Mood:** corporate, trustworthy, accessible, readable, professional, clean
+- **Google Fonts:** [Lexend + Source.com/share?selection.family=Lexend:wgh
+t@300;400;500;600;700|Source+Sans+3:wght@300;400;500;600;700)
+- **Heading/Display Font:** Calistogered/workshop-signage character)
+- **Body Font:** Inter (humanist sans, high legibility for body copy, forms, UI labels)
+- **Mood:** boutique, warm, editoria— not corporate-SaaS, not luxury-fashi
+on
+- **Google Fonts:** https://fonts.goly=Calistoga|Inter:wght@300;400;500;60
+0;700
+
+**CSS Import:**
+```css
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+San
+s+3:wght@300;400;500;600;700&display
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600;700&d
+isplay=swap');
+```
+
+**Scale guidance:** Hero H1 with Calistoga at 36–56pt (clamp), Section H2 28–32pt Calistoga,
+body/UI 16–18pt Inter 400–500. Use Cl-quotes/section labels) —
+never for long paragraphs or form inputs.
+
+### Spacing Variables
+
+| Token | Value | Usage |
+
+
+| Level | Value | Usage |
+|-------|-------|-------|
+| `--shadow-sm` | `0 1px 2px rgba(0
+| `--shadow-md` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, buttons |
+| `--shadow-lg` | `0 10px 15px rgbawns |
+| `--shadow-xl` | `0 20px 25px rgba(0,0,0,0.15)` | Hero images, featured cards |
+| `--shadow-sm` | `0 1px 2px rgba(4|
+| `--shadow-md` | `0 4px 6px rgba(42,26,16,0.10)` | Cards, buttons |
+| `--shadow-lg` | `0 10px 15px rgbaopdowns |
+| `--shadow-xl` | `0 20px 25px rgba(42,26,16,0.16)` | Hero images, featured cards |
+
+Shadow colors tinted warm-brown instead of neutral black, consistent with the palette.
+
+---
+
+## Component Specs
+
+### Buttons
+
+```css
+/* Primary Button */
+.btn-primary {
+  background: #B45309;
+  color: white;
+  padding: 12px 24px;
+/* Primary CTA */
+.btn-cta {
+  background: #C2410C;
+  color: #FFFFFF;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+.btn-cta:hover {
+  background: #9A3412;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.btn-cta:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(194,65
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: transparent;
+  color: #1E3A8A;
+  border: 2px solid #1E3A8A;
+  color: #92400E;
+  border: 2px solid #92400E;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  background: rgba(146,64,14,0.06);
+}
+```
+
+### Cards
+
+```css
+.card {
+  background: #F8FAFC;
+  background: #FFFFFF;
+  border: 1px solid #E8D4A8;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+```
+
+```css
+.input {
+  padding: 12px 16px;
+  border: 1px solid #E2E8F0;
+  border: 1px solid #E8D4A8;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  background: #FFFFFF;
+  transition: border-color 200ms ea
+}
+
+.input:focus {
+  border-color: #1E3A8A;
+  border-color: #C2410C;
+  outline: none;
+  box-shadow: 0 0 0 3px #1E3A8A20;
+  box-shadow: 0 0 0 3px rgba(194,65
+}
+```
+
+### Modals
+
+```css
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-xl);
+  max-width: 500px;
+  width: 90%;
+}
+```
+
+---
+
+## Style Guidelines
+
+**Style:** Trust & Authority
+**Style:** Warm Craftsmanship / Trade-Business Trust
+
+**Keywords:** Certificates/badges displayed, expert credentials, case studies with metrics, before/aft
+er comparisons, industry recognitio
+**Keywords:** handwerklich, warm, verlässlich, Berlin-lokal, unaufdringlich professionell,
+Werkstatt-Charakter — explicitly avification badges, fintech
+dashboards, luxury-fashion minimalism, generic gray-on-white SaaS.
+
+**Best For:** Healthcare/medical landing pages, financial services, enterprise software, premium/luxur
+y products, legal services
+**Best For:** local repair/trade services, workshops, artisan businesses trading on trust +
+craft rather than scale or luxury.
+
+**Key Effects:** Badge hover effectertificate carousel, smooth stat revea
+l
+**Key Effects:** subtle card lift ols on scroll
+(compositor-friendly transform/opacity only), warm-tinted shadows, accent color reserved for
+action (never decorative).
+
+### Page Pattern
+### Page Pattern (adapted for this project's IA — see Phase 2)
+
+**Pattern Name:** Trust & Authority + Conversion
+- **Conversion Strategy:** Free diaas the lead hooks (strongest
+  USPs from the source data), phone CTA always reachable, no forced multi-step funnel.
+- **CTA Placement:** Sticky/visible primary CTA + repeated CTA
+  band before footer.
+- **Section Order:** Hero → USP barp / no-appointment drop-off) →
+  Leistungen → Marken (text only) → Ablauf (3 steps) → Vertrauen → Standort → Kontakt → Footer.
+
+- **Conversion Strategy:** Security badges. Case studies. Transparent pricing. Low-friction form.
+- **CTA Placement:** Contact Sales
+- **Section Order:** 1. Hero (mission/credibility), 2. Proof (logos, certs, stats), 3. Solution overvi
+ew, 4. Clear CTA path
+
+---
+
+## Anti-Patterns (Do NOT Use)
+
+- ❌ Hidden contact info
+- ❌ No certifications
+- ❌ Brand logos for serviced machionly, see research/source-data.json →
+legal.independenceDisclaimer)
+- ❌ Generic gray-on-white with a s
+- ❌ Stock hero with centered headline + gradient blob
+- ❌ Cookie banner / analytics / trs a hard project rule, not a design ch
+oice)
+
+### Additional Forbidden Patterns
+
+- ❌ **Emojis as icons** — Use SVG icons (Heroicons, Lucide, Simple Icons)
+- ❌ **Emojis as icons** — Use SVG
+- ❌ **Missing cursor:pointer** — All clickable elements must have cursor:pointer
+- ❌ **Layout-shifting hovers** — Aift layout
+- ❌ **Low contrast text** — Maintain 4.5:1 minimum contrast ratio
+
+- [ ] All icons from consistent icon set (Heroicons/Lucide)
+- [ ] `cursor-pointer` on all click
+- [ ] Hover states with smooth transitions (150-300ms)
+- [ ] Light mode: text contrast 4.5
+- [ ] Text contrast 4.5:1 minimum (check Foreground/Background and White/Accent pairs above)
+- [ ] Focus states visible for keyb
+- [ ] `prefers-reduced-motion` respected
+- [ ] Responsive: 375px, 768px, 102
+- [ ] No content hidden behind fixed navbars
+- [ ] No horizontal scroll on mobil
+- [ ] No brand logos used anywhere (text-only brand mentions)
+- [ ] No tracking scripts / cookie
+
+GATE 1 — Design-System bereit. design-system
+
+Kurz zur Begründung: Das Skill-Tool ordnete rischen "Trust & Authority"-Muster zu(Navy/Gold, Lexend — Kategorie "Plumber/Electrician", wirkt wie Healthcare/Fintech-SaaS). Das kollidiert mit deinen
+globalen Web-Design-Guardrails (Anti-Templatppe. Ich habe daher überschrieben:
+
+- Farben: Espresso-Braun (#92400E) + Creme-Hvy/Weiß, mit einem separaten, kräftigerenKupfer-Akzent (#C2410C) exklusiv für CTAs — Farbe wird damit semantisch statt nur dekorativ genutzt.
+- Typografie: Calistoga (Display-Slab-Serif,i-Beschriftung) + Inter (Fließtext) stattLexend/Source Sans — mehr Charakter, kein Corporate-Standard-Font-Stack.
+- Spacing/Shadow-Tokens und Grundstruktur destilneutral, kein Korrekturbedarf).
+- Abweichung ist im MASTER.md dokumentiert (Abschnitt "Deviation Note"), wie im Auftrag gefordert.           
+Bitte schau dir die Datei an und gib Bescheid, ob Palette/Typo/Stilrichtung so passen, bevor ich mit Phase 2 (Informationsarchitektur) weitermache.
