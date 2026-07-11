@@ -15,6 +15,8 @@ type ImageSrc =
 type BaseBlock = {
   title: string;
   body?: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 export type ServicePage = {
@@ -34,7 +36,7 @@ export type ServicePage = {
   sections: Array<
     | (BaseBlock & { kind: "steps"; items: BaseBlock[] })
     | (BaseBlock & { kind: "cards"; items: BaseBlock[] })
-    | (BaseBlock & { kind: "prices"; items: Array<{ name: string; details: string[] }> })
+    | (BaseBlock & { kind: "prices"; items: Array<{ name: string; details: string[]; image?: string; imageAlt?: string }> })
     | (BaseBlock & {
         kind: "locations";
         items: Array<{ district: string; name: string; address: string; hours: string[]; href: string }>;
@@ -96,7 +98,7 @@ export const servicePages: Record<ServicePageSlug, ServicePage> = {
           {
             title: "Auftragsschein",
             body:
-              "Die Altseite bittet darum, den Auftragsschein nach Moeglichkeit vorab auszufüllen, um Wartezeiten bei der Übergabe zu vermeiden.",
+              "Die Altseite bittet darum, den Auftragsschein nach Möglichkeit vorab auszufüllen, um Wartezeiten bei der Übergabe zu vermeiden.",
           },
           {
             title: "Rückversand bei Ablehnung",
@@ -140,26 +142,38 @@ export const servicePages: Record<ServicePageSlug, ServicePage> = {
         items: [
           {
             name: "Jura Giga X7 Professional Kaffeevollautomat",
+            image: "/images/rental/jura_giga_x7_mieten.jpg",
+            imageAlt: "Jura Giga X7 Professional Kaffeevollautomat als Mietmaschine",
             details: ["Tagesmiete 89,00 Euro", "je weiterer Tag 69,00 Euro", "Wochenendtarif 158,00 Euro", "Wochentarif 298,00 Euro"],
           },
           {
             name: "ECM Elektronika 2 Gruppig mit Wassertank und 230V Anschluss",
+            image: "/images/rental/ecm_electronika_2_gruppig.jpg",
+            imageAlt: "ECM Elektronika zweigruppige Espressomaschine als Mietmaschine",
             details: ["Tagesmiete 179,00 Euro", "je weiterer Tag 69,00 Euro", "Wochenendtarif 248,00 Euro", "Wochentarif 349,00 Euro"],
           },
           {
             name: "Jura X8 Platin Kaffeevollautomat",
+            image: "/images/rental/jura_x8_kaffeemaschine.jpg",
+            imageAlt: "Jura X8 Platin Kaffeevollautomat als Mietmaschine",
             details: ["Tagesmiete 79,00 Euro", "je weiterer Tag 59,00 Euro", "Wochenendtarif 138,00 Euro", "Wochentarif 279,00 Euro"],
           },
           {
             name: "Bezzera Aria Espressomaschine",
+            image: "/images/rental/bezzera_aria_berlin.jpg",
+            imageAlt: "Bezzera Aria Espressomaschine als Mietmaschine",
             details: ["Tagesmiete 69,00 Euro", "je weiterer Tag 29,00 Euro", "Wochenendtarif 98,00 Euro", "Wochentarif 179,00 Euro"],
           },
           {
             name: "Jura XJ9 Kaffeevollautomat",
+            image: "/images/rental/jura_xj9_kaffeevollautomat.jpg",
+            imageAlt: "Jura XJ9 Kaffeevollautomat als Mietmaschine",
             details: ["Tagesmiete 59,00 Euro", "je weiterer Tag 39,00 Euro", "Wochenendtarif 98,00 Euro", "Wochentarif 219,00 Euro"],
           },
           {
             name: "Ceado E37 Kaffeemühle / Espressomühle",
+            image: "/images/rental/ceado_37s_kaffeemuehle.jpg",
+            imageAlt: "Ceado E37 Espressomühle als Mietgerät",
             details: ["Tagesmiete 29,00 Euro", "je weiterer Tag 15,00 Euro", "Wochenendtarif 39,00 Euro", "Wochentarif 89,00 Euro"],
           },
         ],
@@ -168,11 +182,26 @@ export const servicePages: Record<ServicePageSlug, ServicePage> = {
         kind: "cards",
         title: "Kaffeebohnen zur Miete",
         body:
-          "Die Mietseite nennt Miss Silvia Caffe Crema, Aroma und Espresso als 1000-g-Packungen. Berechnet werden laut Formularhinweis nur gegeöffnete Verpackungen.",
+          "Die Mietseite nennt Miss Silvia Caffe Crema, Aroma und Espresso als 1000-g-Packungen. Berechnet werden laut Formularhinweis nur geöffnete Verpackungen.",
         items: [
-          { title: "Miss Silvia Caffe Crema", body: "80% Arabica / 20% Robusta, 1000 g, 24,90 Euro inkl. 7% MwSt." },
-          { title: "Miss Silvia Caffe Aroma", body: "70% Arabica / 30% Robusta, 1000 g, 22,90 Euro inkl. 7% MwSt." },
-          { title: "Miss Silvia Caffe Espresso", body: "60% Arabica / 40% Robusta, 1000 g, 21,50 Euro inkl. 7% MwSt." },
+          {
+            title: "Miss Silvia Caffe Crema",
+            body: "80% Arabica / 20% Robusta, 1000 g, 24,90 Euro inkl. 7% MwSt.",
+            image: "/images/rental/miss_silvia_kaffee_crema.jpg",
+            imageAlt: "Miss Silvia Caffe Crema Kaffeebohnen",
+          },
+          {
+            title: "Miss Silvia Caffe Aroma",
+            body: "70% Arabica / 30% Robusta, 1000 g, 22,90 Euro inkl. 7% MwSt.",
+            image: "/images/rental/miss_silvia_kaffee_aroma.jpg",
+            imageAlt: "Miss Silvia Caffe Aroma Kaffeebohnen",
+          },
+          {
+            title: "Miss Silvia Caffe Espresso",
+            body: "60% Arabica / 40% Robusta, 1000 g, 21,50 Euro inkl. 7% MwSt.",
+            image: "/images/rental/miss_silvia_kaffee_espresso.jpg",
+            imageAlt: "Miss Silvia Caffe Espresso Kaffeebohnen",
+          },
         ],
       },
       {
@@ -194,7 +223,7 @@ export const servicePages: Record<ServicePageSlug, ServicePage> = {
       kicker: "Online-Formular",
       title: "Anfrage oder Abholtermin vorbereiten.",
       body:
-        "Nutzen Sie die Seite für Reparaturanfragen und Abholtermin-Vorschlaege. Der Versand ist im neuen Projekt noch TODO.",
+        "Nutzen Sie die Seite für Reparaturanfragen und Abholtermin-Vorschläge. Der Versand ist im neuen Projekt noch TODO.",
       image: "/images/abholservice.webp",
       imageAlt: "Kaffeemaschine wird für den Abholservice vorbereitet",
     },

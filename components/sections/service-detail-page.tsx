@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "@/components/ui/icon";
 import { SiteImage } from "@/components/ui/site-image";
 import { data, phoneHref } from "@/lib/source-data";
@@ -128,6 +129,18 @@ export function ServiceDetailPage({ page }: { page: ServicePage }) {
                 <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                   {section.items.map((item) => (
                     <article className="card" key={item.name}>
+                      {item.image ? (
+                        <div className="-mx-2 -mt-2 mb-5 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-background)]">
+                          <Image
+                            src={item.image}
+                            alt={item.imageAlt || item.name}
+                            width={305}
+                            height={305}
+                            sizes="(min-width: 1024px) 28vw, (min-width: 768px) 42vw, 100vw"
+                            className="aspect-square h-full w-full object-contain p-3"
+                          />
+                        </div>
+                      ) : null}
                       <h3 className="text-lg font-extrabold text-[var(--color-primary)]">
                         {item.name}
                       </h3>
@@ -221,6 +234,18 @@ export function ServiceDetailPage({ page }: { page: ServicePage }) {
               <div className="mt-10 grid gap-5 md:grid-cols-3">
                 {section.items.map((item) => (
                   <article className="card" key={item.title}>
+                    {item.image ? (
+                      <div className="-mx-2 -mt-2 mb-5 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-background)]">
+                        <Image
+                          src={item.image}
+                          alt={item.imageAlt || item.title}
+                          width={417}
+                          height={500}
+                          sizes="(min-width: 768px) 28vw, 100vw"
+                          className="mx-auto aspect-[417/500] max-h-72 w-full object-contain p-3"
+                        />
+                      </div>
+                    ) : null}
                     <h3 className="text-lg font-extrabold text-[var(--color-primary)]">{item.title}</h3>
                     <p className="mt-3 leading-7 text-[var(--color-muted-foreground)]">{item.body}</p>
                   </article>
