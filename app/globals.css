@@ -186,3 +186,23 @@ summary:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.brand-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 40s linear infinite;
+}
+
+.brand-ticker:hover .brand-ticker-track,
+.brand-ticker:focus-within .brand-ticker-track {
+  animation-play-state: paused;
+}

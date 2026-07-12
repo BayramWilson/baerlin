@@ -1,31 +1,5 @@
-import { SiteImage } from "@/components/ui/site-image";
+import Image from "next/image";
 import { data } from "@/lib/source-data";
-
-function BrandLogo({ brand }: { brand: string }) {
-  return (
-    <div className="group flex flex-col items-center gap-2 text-center">
-      <div className="flex h-16 w-full items-center justify-center rounded-lg border border-[var(--color-border)] bg-white px-3 py-2 shadow-sm transition hover:shadow-md">
-        <svg
-          viewBox="0 0 120 40"
-          className="h-full w-full"
-          role="img"
-          aria-label={brand}
-        >
-          <text
-            x="50%"
-            y="50%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            className="fill-[var(--color-primary)] text-[11px] font-bold uppercase tracking-tight"
-          >
-            {brand.length > 12 ? `${brand.slice(0, 12)}…` : brand}
-          </text>
-        </svg>
-      </div>
-      <span className="text-xs font-medium text-[var(--color-muted-foreground)]">{brand}</span>
-    </div>
-  );
-}
 
 export function Brands() {
   const namedBrands = data.brands.filter((brand) => !brand.includes("(allg.)"));
@@ -45,13 +19,32 @@ export function Brands() {
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
-          {namedBrands.map((brand) => (
-            <BrandLogo key={brand} brand={brand} />
-          ))}
+        <div className="mt-10 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white shadow-sm">
+          <Image
+            src="/images/brand-grid.jpg"
+            alt="Markenlogos von Jura, DeLonghi, Saeco, GAGGIA, LaPavoni, KitchenAid, Isomac, Bezzera, Rocket, ECM, BFC, Vibiemme, Quickmill, Nivona, Melitta, Rancilio, Bosch, Siemens, Miele, Acopino, Beko, Smeg, Rotel, WMF, Philips, NEFF, Gaggenau, Krups und Thermomix"
+            width={1200}
+            height={800}
+            className="h-auto w-full"
+            unoptimized
+          />
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="relative mt-8 overflow-hidden rounded-xl border border-[var(--color-border)] bg-white py-4 brand-ticker">
+          <div className="brand-ticker-track">
+            {[...namedBrands, ...namedBrands].map((brand, index) => (
+              <span
+                key={`${brand}-${index}`}
+                className="whitespace-nowrap px-4 text-sm font-semibold text-[var(--color-muted-foreground)]"
+              >
+                {brand}
+                <span className="mx-4 text-[var(--color-border)]">•</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 text-center">
           <p className="text-xs font-bold uppercase text-[var(--color-muted-foreground)]">
             Außerdem
           </p>
@@ -59,12 +52,6 @@ export function Brands() {
             {machineTypes.join(", ")}
           </p>
         </div>
-
-        <SiteImage
-          src="/images/maschinen-lineup.webp"
-          alt="Verschiedene Kaffee- und Espressomaschinen nebeneinander auf einer Werkbank"
-          className="mx-auto mt-12 aspect-[3/2] max-w-3xl"
-        />
       </div>
     </section>
   );
