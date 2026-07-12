@@ -5,6 +5,100 @@ import { SiteImage } from "@/components/ui/site-image";
 import { data, phoneHref } from "@/lib/source-data";
 import type { ServicePage } from "@/lib/service-pages";
 
+function RentalForm({ title }: { title: string }) {
+  return (
+    <form className="card grid gap-5" action="#" aria-label={title}>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="grid gap-2">
+          <span className="form-label">Name *</span>
+          <input className="input" name="name" autoComplete="name" required />
+        </label>
+        <label className="grid gap-2">
+          <span className="form-label">E-Mail *</span>
+          <input className="input" name="email" type="email" autoComplete="email" required />
+        </label>
+        <label className="grid gap-2">
+          <span className="form-label">Telefon *</span>
+          <input className="input" name="phone" type="tel" autoComplete="tel" required />
+        </label>
+        <label className="grid gap-2">
+          <span className="form-label">Firma / Organisation</span>
+          <input className="input" name="company" autoComplete="organization" />
+        </label>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="grid gap-2">
+          <span className="form-label">Gewünschte Maschine</span>
+          <select className="input" name="machine" defaultValue="">
+            <option value="" disabled>Bitte wählen</option>
+            <option value="Jura Giga X7">Jura Giga X7</option>
+            <option value="ECM Elektronika 2 Gruppig">ECM Elektronika 2 Gruppig</option>
+            <option value="Jura X8 Platin">Jura X8 Platin</option>
+            <option value="Bezzera Aria">Bezzera Aria</option>
+            <option value="Jura XJ9">Jura XJ9</option>
+            <option value="Ceado E37 Kaffeemühle">Ceado E37 Kaffeemühle</option>
+            <option value="Andere">Andere / noch unentschieden</option>
+          </select>
+        </label>
+        <label className="grid gap-2">
+          <span className="form-label">Verwendungszweck</span>
+          <select className="input" name="purpose" defaultValue="">
+            <option value="" disabled>Bitte wählen</option>
+            <option value="Büro">Büro</option>
+            <option value="Messe">Messe</option>
+            <option value="Event">Event</option>
+            <option value="Privat">Privat</option>
+            <option value="Sonstiges">Sonstiges</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="grid gap-2">
+          <span className="form-label">Mietbeginn *</span>
+          <input className="input" name="startDate" type="date" required />
+        </label>
+        <label className="grid gap-2">
+          <span className="form-label">Mietende *</span>
+          <input className="input" name="endDate" type="date" required />
+        </label>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="grid gap-2">
+          <span className="form-label">Anzahl Personen / Gäste</span>
+          <input className="input" name="guests" type="number" min={1} placeholder="z. B. 50" />
+        </label>
+        <label className="grid gap-2">
+          <span className="form-label">Liefer-/Abholort</span>
+          <input className="input" name="location" placeholder="z. B. Berlin Mitte" />
+        </label>
+      </div>
+
+      <label className="grid gap-2">
+        <span className="form-label">Weitere Wünsche / Hinweise</span>
+        <textarea className="input min-h-28" name="message" placeholder="Kaffeebohnen, Milchoptionen, Zubehör, Abholung …" />
+      </label>
+
+      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-muted)] p-4 text-sm leading-6 text-[var(--color-muted-foreground)]">
+        TODO: Dieses Formular versendet noch keine Daten. Bitte rufen Sie für echte Mietanfragen aktuell an.
+      </div>
+
+      <div className="flex flex-wrap gap-3">
+        <button type="submit" className="btn-cta w-fit">
+          <Icon name="truck" className="h-5 w-5" />
+          Mietanfrage absenden
+        </button>
+        <a className="btn-secondary w-fit" href={phoneHref}>
+          <Icon name="phone" className="h-5 w-5" />
+          Jetzt anrufen
+        </a>
+      </div>
+    </form>
+  );
+}
+
 function DetailForm({ title }: { title: string }) {
   return (
     <form className="card grid gap-5" action="#" aria-label={title}>
@@ -202,6 +296,7 @@ export function ServiceDetailPage({ page }: { page: ServicePage }) {
         }
 
         if (section.kind === "form") {
+          const isRental = page.slug === "kaffeemaschinen-vermietung-berlin";
           return (
             <section id="anfrage" className="section-pad bg-[var(--color-background)]" key={section.title}>
               <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
@@ -216,7 +311,7 @@ export function ServiceDetailPage({ page }: { page: ServicePage }) {
                     Nach einer Anfrage nennt die Altseite eine Bestätigung per E-Mail. Falls diese nicht eintrifft, soll telefonisch oder per E-Mail Kontakt aufgenommen werden.
                   </p>
                 </div>
-                <DetailForm title={section.title} />
+                {isRental ? <RentalForm title={section.title} /> : <DetailForm title={section.title} />}
               </div>
             </section>
           );
